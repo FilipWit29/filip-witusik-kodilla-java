@@ -2,6 +2,7 @@ package com.kodilla.testing.library;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -25,11 +26,11 @@ class BookDirectoryTestSuite {
 
     @Mock
     private LibraryDatabase libraryDatabaseMock;
-
+    @InjectMocks
+    private BookLibrary bookLibrary;
     @Test
     void testListBooksWithConditionsReturnList() {
         // Given
-        BookLibrary bookLibrary = new BookLibrary(libraryDatabaseMock);
         List<Book> resultListOfBooks = new ArrayList<>();
         Book book1 = new Book("Secrets of Alamo", "John Smith", 2008);
         Book book2 = new Book("Secretaries and Directors", "Dilbert Michigan", 2012);
@@ -49,7 +50,6 @@ class BookDirectoryTestSuite {
     @Test
     void testListBooksWithConditionMoreThan20() {
         // Given
-        BookLibrary bookLibrary = new BookLibrary(libraryDatabaseMock);
         List<Book> resultListOf0Books = new ArrayList<>();
         List<Book> resultListOf15Books = generateListOfNBooks(15);
         List<Book> resultListOf40Books = generateListOfNBooks(40);
@@ -69,9 +69,7 @@ class BookDirectoryTestSuite {
 
     @Test
     void testListBooksWithConditionFragmentShorterThan3() {
-        // Given
-        LibraryDatabase libraryDatabaseMock = mock(LibraryDatabase.class);            
-        BookLibrary bookLibrary = new BookLibrary(libraryDatabaseMock);               
+
         // When
         List<Book> theListOfBooks10 = bookLibrary.listBooksWithCondition("An");
         // Then
@@ -82,8 +80,6 @@ class BookDirectoryTestSuite {
     @Test
     void testListBooksInHandsofNoBooksBorrowed(){
         // Given
-        LibraryDatabase libraryDatabaseMock = mock(LibraryDatabase.class);
-        BookLibrary bookLibrary = new BookLibrary(libraryDatabaseMock);
         LibraryUser user = new LibraryUser("Jacob","Smith","123");
         List<Book> resultListOfBooks = new ArrayList<>();
         when(libraryDatabaseMock.listBooksInHandsOf(user)).thenReturn(resultListOfBooks);
@@ -96,8 +92,6 @@ class BookDirectoryTestSuite {
     @Test
     void testListBooksInHandsOfOneBookBorrowed() {
         // Given
-        LibraryDatabase libraryDatabaseMock = mock(LibraryDatabase.class);
-        BookLibrary bookLibrary = new BookLibrary(libraryDatabaseMock);
         LibraryUser user = new LibraryUser("Jacob","Smith","123");
         List<Book> resultListOfBooks = new ArrayList<>();
         Book book1 = new Book("Secrets of Alamo", "John Smith", 2008);
@@ -113,7 +107,6 @@ class BookDirectoryTestSuite {
     void testListBooksInHandsOfFiveBooksBorrowed() {
         // Given
         LibraryUser user = new LibraryUser("Jacob","Smith","123");
-        BookLibrary bookLibrary = new BookLibrary(libraryDatabaseMock);
         List<Book> resultListOfBooks = new ArrayList<>();
         Book book1 = new Book("Secrets of Alamo", "John Smith", 2008);
         Book book2 = new Book("Secretaries and Directors", "Dilbert Michigan", 2012);

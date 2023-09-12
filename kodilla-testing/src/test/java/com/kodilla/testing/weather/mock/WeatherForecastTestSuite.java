@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -19,6 +20,7 @@ public class WeatherForecastTestSuite {
     @ExtendWith(MockitoExtension.class)
     @Mock
     private Temperatures temperaturesMock;
+    @InjectMocks
     private WeatherForecast weatherForecast;
 
     @BeforeEach
@@ -30,7 +32,6 @@ public class WeatherForecastTestSuite {
         temperaturesMap.put("Warszawa", 25.2);
         temperaturesMap.put("Gdansk", 26.1);
         when(temperaturesMock.getTemperatures()).thenReturn(temperaturesMap);
-        weatherForecast = new WeatherForecast(temperaturesMock);
     }
     @Test
     void testCalculateForecastWithMock() {
