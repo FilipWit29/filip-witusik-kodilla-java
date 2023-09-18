@@ -1,36 +1,21 @@
 package com.kodilla.stream;
 
+import com.kodilla.stream.forumuser.Forum;
+import com.kodilla.stream.forumuser.ForumUser;
 
-import com.kodilla.stream.beautifier.PoemBeautifier;
-import com.kodilla.stream.iterate.NumbersGenerator;
-import com.kodilla.stream.lambda.ExpressionExecutor;
-import com.kodilla.stream.reference.FunctionalCalculator;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class StreamMain {
     public static void main(String[] args) {
-        ExpressionExecutor expressionExecutor = new ExpressionExecutor();
-
-        System.out.println("Calculating expressions with lambdas");
-        expressionExecutor.executeExpression(10, 5, (a, b) -> a + b);
-        expressionExecutor.executeExpression(10, 5, (a, b) -> a - b);
-        expressionExecutor.executeExpression(10, 5, (a, b) -> a * b);
-        expressionExecutor.executeExpression(10, 5, (a, b) -> a / b);
-
-        System.out.println("Calculating expressions with method references");
-        expressionExecutor.executeExpression(3,4, FunctionalCalculator::multiplyAByB);
-        expressionExecutor.executeExpression(3,4, FunctionalCalculator::addAToB);
-        expressionExecutor.executeExpression(3,4, FunctionalCalculator::subBFromA);
-        expressionExecutor.executeExpression(3,4, FunctionalCalculator::divideAByB);
-
-        System.out.println("Poem Beautifier");
-        PoemBeautifier beautifier = new PoemBeautifier();
-
-        beautifier.beautify("No longer alive", text -> "ABC" + text + "ABC");
-        beautifier.beautify("hell's kitchen", String::toUpperCase);
-        beautifier.beautify("Random text", text -> text + "!!!");
-        beautifier.beautify("I love my mom", text -> "We love our moms!");
-
-        System.out.println("Using Stream to generate even numbers from 1 to 20");
-        NumbersGenerator.generateEven(20);
+        Forum users = new Forum();
+        users.addUsersForum();
+        List<ForumUser> filteredUsers = users.getUserList().stream()
+                .filter(user -> user.getGender() == 'M')
+                .filter(user -> LocalDate.now().minusYears(20).isAfter(user.getDateOfBirth()))
+                .filter(user -> user.getPosts() > 0)
+                .collect(Collectors.toList());
+                filteredUsers.forEach(System.out::println);
     }
 }
