@@ -2,6 +2,7 @@ package com.kodilla.stream;
 
 
 import com.kodilla.stream.beautifier.PoemBeautifier;
+import com.kodilla.stream.iterate.NumbersGenerator;
 import com.kodilla.stream.lambda.ExpressionExecutor;
 import com.kodilla.stream.reference.FunctionalCalculator;
 
@@ -28,5 +29,8 @@ public class StreamMain {
         beautifier.beautify("hell's kitchen", String::toUpperCase);
         beautifier.beautify("Random text", text -> text + "!!!");
         beautifier.beautify("I love my mom", text -> "We love our moms!");
+
+        System.out.println("Using Stream to generate even numbers from 1 to 20");
+        NumbersGenerator.generateEven(20);
     }
 }
