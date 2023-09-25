@@ -149,7 +149,7 @@ public class BoardTestSuite {
         double sumDays = project.getTaskLists().stream()
                 .filter(inProgressTasks::contains)
                 .flatMap(tl -> tl.getTasks().stream())
-                .mapToDouble(t -> ChronoUnit.DAYS.between(t.getCreated(), LocalDate.now()))
+                .mapToLong(t -> ChronoUnit.DAYS.between(t.getCreated(), LocalDate.now()))
                 .sum();
 
         long countTask = project.getTaskLists().stream()
