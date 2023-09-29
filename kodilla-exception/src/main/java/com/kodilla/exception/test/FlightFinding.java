@@ -12,11 +12,12 @@ public class FlightFinding {
         airport.put("Goleniów", true);
     }
 
-    public  void findFlight(Flight flight) throws RouteNotFoundException {
+    public boolean findFlight(Flight flight) throws RouteNotFoundException {
         String arrivalAirport = flight.getArrivalAirport();
 
         if(airport.containsKey(arrivalAirport)) {
             System.out.println("Flight finded from: " + flight.getDepartureAirport() + " to: " + arrivalAirport);
+            return airport.get(arrivalAirport);
         } else {
             throw new RouteNotFoundException("Unable to find route to airport: " + arrivalAirport);
         }
