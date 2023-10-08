@@ -1,4 +1,4 @@
-package com.kodilla.spring.forum;
+package com.kodilla.spring;
 
 import com.example.spring.KodillaSpringApplication;
 import org.springframework.boot.SpringApplication;
