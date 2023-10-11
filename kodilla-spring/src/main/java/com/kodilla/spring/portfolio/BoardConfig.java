@@ -22,7 +22,7 @@ public class BoardConfig {
     }
 
     @Bean
-    public Board board() {
-        return new Board(createToDoList(),createInProgressList(),createDoneList());
+    public Board board(TaskList createToDoList, TaskList createInProgressList, TaskList createDoneList) {
+        return new Board(createToDoList, createInProgressList, createDoneList);
     }
 }
