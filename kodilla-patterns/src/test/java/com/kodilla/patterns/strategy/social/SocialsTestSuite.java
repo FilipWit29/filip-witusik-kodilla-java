@@ -32,10 +32,10 @@ public class SocialsTestSuite {
         //When
         String marcosharing = marco.sharePost();
         System.out.println("Marco " + marcosharing);
-        marco.setSocialPublisher(new FacebookPublisher());
+        marco.setSocialPublisher(new TwitterPublisher());
         marcosharing = marco.sharePost();
         System.out.println("Marco now " + marcosharing);
         //Then
-        assertSame("Is sharing post on Facebook!", marcosharing);
+        assertSame("Is sharing post on Twitter!", marcosharing);
     }
 }
