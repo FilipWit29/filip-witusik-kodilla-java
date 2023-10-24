@@ -1,0 +1,9 @@
+SELECT i.summary, il.name
+FROM ISSUES i JOIN issueslists il on il.id = i.ISSUESLIST_ID;
+
+SELECT i.SUMMARY, U.firstname
+FROM USERS u join issues i on u.id = i.USER_ID_ASSIGNEDTO;
+
+SELECT u.firstname, u.lastname, COUNT(i.id) AS ISSUES_NUMBER
+FROM users u join issues i on u.ID = i.USER_ID_ASSIGNEDTO
+GROUP BY u.ID;
