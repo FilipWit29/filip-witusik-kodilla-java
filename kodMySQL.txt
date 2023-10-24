@@ -1,0 +1,34 @@
+CREATE TABLE ISSUESLISTS (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    NAME VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE ISSUES (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    ISSUESLIST_ID INT,
+    SUMMARY VARCHAR(255) NOT NULL,
+    DESCRIPTION TEXT,
+    USER_ID_ASSIGNEDTO BIGINT UNSIGNED,
+    FOREIGN KEY (ISSUESLIST_ID) REFERENCES ISSUESLISTS(ID),
+    FOREIGN KEY (USER_ID_ASSIGNEDTO) REFERENCES USERS(ID)
+);
+
+INSERT INTO ISSUESLISTS (NAME) VALUES ('ToDo'), ('In progress'), ('Done');
+
+INSERT INTO ISSUES (ISSUESLIST_ID, SUMMARY, DESCRIPTION, USER_ID_ASSIGNEDTO)
+VALUES
+    (1, 'Creating a database', 'The task is to create a MySQL database.', 1),
+    (1, 'Adding the USERS table', 'The USERS table must be added to the database.', 2),
+    (1, 'Write a report', 'A report on the progress of the project should be written.', 3),
+    (1, 'Software testing', 'Conduct software testing.', 4),
+    (1, 'End of the project', 'The task is to complete the project.', 1),
+    (2, 'Final tests', 'Conduct final tests before handing over the project.', 3),
+    (1, 'Write a project proposal', 'Prepare a project proposal for the upcoming project.', 2),
+    (1, 'Define project requirements', 'Gather and define project requirements with the team.', 3),
+    (1, 'Create a project timeline', 'Develop a timeline for project milestones and tasks.', 4),
+    (2, 'Design user interface', 'Work on the design of the user interface for the application.', 1),
+    (2, 'Code application features', 'Start coding the core features of the application.', 2),
+    (2, 'Testing and debugging', 'Perform testing and debugging of the application.', 3),
+    (3, 'Client presentation', 'Prepare a presentation for the client meeting.', 1),
+    (3, 'Final project documentation', 'Complete the final project documentation.', 2),
+    (3, 'Project sign-off', 'Get the project sign-off from the client.', 3);
