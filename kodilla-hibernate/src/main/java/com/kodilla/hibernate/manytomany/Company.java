@@ -1,11 +1,18 @@
 package com.kodilla.hibernate.manytomany;
 
 import jakarta.persistence.*;
+
 import org.antlr.v4.runtime.misc.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@NamedNativeQuery(
+        name = "Company.findByFirst3Letters",
+        query = "SELECT * FROM COMPANIES" +
+                " WHERE SUBSTRING(COMPANY_NAME,1 , 3) = :characters",
+        resultClass = Company.class
+)
 @Entity
 @Table(name = "COMPANIES")
 public class Company {
